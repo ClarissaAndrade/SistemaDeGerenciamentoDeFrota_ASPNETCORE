@@ -11,6 +11,5 @@ namespace SGF.Models
         public string CompanyName { get; set; }
         public string ContactName { get; set; }
         public int Telephone { get; set; }
-        public List<City> Coverage { get; set; }
     }
 }

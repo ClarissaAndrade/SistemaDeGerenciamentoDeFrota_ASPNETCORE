@@ -1,14 +1,30 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using SGF.Models;
+using SGF.Models.ViewModels;
+using SGF.Services;
+using SGF.Services.Exceptions;
 
 namespace SGF.Controllers
 {
     public class DryCargosController : Controller
     {
+
+        private readonly DryCargoService _dryCargoService;
+        private readonly CityService _cityService;
+        private readonly StateService _stateService;
+
+        public DryCargosController(DryCargoService dryCargoService, CityService cityService, StateService stateService)
+        {
+            _dryCargoService = dryCargoService;
+            _cityService = cityService;
+            _stateService = stateService;
+        }
+
         // GET: DryCargosController
         public ActionResult Index()
         {
