@@ -13,6 +13,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using SGF.Models;
+using SGF.Services;
 //using SGF.Data;
 //using SGF.Services;
 
@@ -45,6 +46,9 @@ namespace SGF
                    options.UseMySql(Configuration.GetConnectionString("SGFContext"), builder =>
                        builder.MigrationsAssembly("SGF")));
 
+            services.AddScoped<DryCargoService>();
+            services.AddScoped<CityService>();
+            services.AddScoped<StateService>();
             //services.AddScoped<SeedingService>();
             //services.AddScoped<SellerService>();
             //services.AddScoped<DepartmentService>();

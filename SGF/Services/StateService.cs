@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Mvc;
 
 namespace SGF.Services
 {
@@ -15,9 +16,11 @@ namespace SGF.Services
             _context = context;
         }
 
-        public async Task<List<State>> FindAllAsync()
+        public string GetAllStates()
         {
-            return await _context.State.OrderBy(x => x.Name).ToListAsync();
+            var states = _context.State.OrderBy(x => x.Name).Select(y => new { Id = y.Id, Value = y.Name }).ToList();
+
+            return Newtonsoft.Json.JsonConvert.SerializeObject(new {states});
         }
     }
 }

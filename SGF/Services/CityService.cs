@@ -15,9 +15,22 @@ namespace SGF.Services
             _context = context;
         }
 
-        public async Task<List<City>> FindAllAsync()
+        public string GetAllCities(string state)
         {
-            return await _context.City.OrderBy(x => x.Name).ToListAsync();
+            int stateId;
+            int stateIdSucess;
+
+            if (int.TryParse(state, out stateIdSucess)) {
+                stateId = stateIdSucess;
+            }
+            else
+            {
+                stateId = 0;
+            }
+            var cities = _context.City.OrderBy(c => c.Name).Where(c => c.StateId == stateId).Select(y => new { Id = y.Id, Value = y.Name }).ToList();
+
+
+            return Newtonsoft.Json.JsonConvert.SerializeObject(new { cities });
         }
     }
 }

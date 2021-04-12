@@ -39,7 +39,15 @@ namespace SGF.Models
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime ArrivalDate { get; set; }
-        
+
+        [Required(ErrorMessage = "{0} obrigatório")]
+        [Display(Name = "Estado de Partida")]
+        public State DepartureState { get; set; }
+
+        [Required(ErrorMessage = "{0} obrigatório")]
+        [Display(Name = "Cidade de Partida")]
+        public City DepartureCity { get; set; }
+
         public ShippingCompany ShippingCompany { get; set; }
         public int ShippingCompanyId { get; set; }
         public virtual ICollection<DryCargo_City> DryCargo_Cities { get; set; }

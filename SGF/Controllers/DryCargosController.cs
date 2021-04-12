@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SGF.Models;
 using SGF.Models.ViewModels;
 using SGF.Services;
-using SGF.Services.Exceptions;
+
 
 namespace SGF.Controllers
 {
@@ -98,6 +99,20 @@ namespace SGF.Controllers
             {
                 return View();
             }
+        }
+
+        public string GetStates()
+        {
+            var states = _stateService.GetAllStates();
+
+            return states;
+        }
+
+        public string GetCities(string state)
+        {
+            var cities = _cityService.GetAllCities(state);
+
+            return cities;
         }
     }
 }
